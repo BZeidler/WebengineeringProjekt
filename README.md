@@ -34,21 +34,21 @@ Hier steht tatsächlich eher eine Textfassung der Anforderungen an das Projekt. 
   
 ### Benötigt im Backend (DB)
 Alle Daten die in irgendeiner Form in der DB gespeichert werden müssen, sortiert nach Funktionen.
-- SignUp: neuer Nutzer: Anzeige Name(?), Mail, PW, Text
+-  ~~SignUp: neuer Nutzer: Anzeige Name(?), Mail, PW, Text~~
 - Find Match
-  - like Texte/Nutzer (soll nicht nocheinmal gezeigt werden)
-  - dislike Texte/Nutzer (soll nicht nocheinmal gezeigt werden)
-  - likedBy (priorisierung dieser Texte)
+  - ~~like Texte/Nutzer (soll nicht nocheinmal gezeigt werden)~~
+  - ~~dislike Texte/Nutzer (soll nicht nocheinmal gezeigt werden)~~
+  - ~~likedBy (priorisierung dieser Texte)~~(bereits enthalten in like, keine Änderung)
 - List Matches
-  - Vorhandene Matches, Paar von 2 Nutzern
+  - ~~Vorhandene Matches, Paar von 2 Nutzern~~
 - Chatting
   - Chatverlauf: Autor, TimeStamp, Text
   
 ### Benötigt im Backend (Java)
 - Funktion SignUp
-  - neuen Nutzer in DB einfügen (Eintrag in DB)
-  - ggf. Login 
-- Funktion Login (theor. Fertig aus VL ?)
+  - ~~neuen Nutzer in DB einfügen (Eintrag in DB)~~
+  - ~~ggf. Login~~ (Token wird returned) 
+- ~~Funktion Login (theor. Fertig aus VL ?)~~
   - ???
 - Funktion findMatch
   - Rückgabe Nutzer/Text (laden aus DB)
