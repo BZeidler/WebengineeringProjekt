@@ -28,4 +28,22 @@ public class AuthenticationController {
         }
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
+    
+    public static class UserSignup {
+        public String email;
+        public String password;
+        public String name;
+        public String message;
+    }
+    
+    @RequestMapping(value = "signup", method = RequestMethod.POST)
+    public ResponseEntity<AuthenticationService.UserToken> signup(@RequestBody UserSignup userSignup) {
+        AuthenticationService.UserToken token = service.signup(userSignup.email, userSignup.password, userSignup.name, userSignup.message);
+
+        if (token == null) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(token, HttpStatus.CREATED);
+    }
+    
 }

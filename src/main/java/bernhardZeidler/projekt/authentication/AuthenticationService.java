@@ -32,7 +32,6 @@ public class AuthenticationService {
         public String token;
     }
 
-
     /**
      * Create a JWT token and additional user information if the user's credentails are valid.
      *
@@ -61,7 +60,6 @@ public class AuthenticationService {
         return userToken;
     }
 
-
     /**
      * Validate that a token is valid and returns its body.
      *
@@ -77,9 +75,6 @@ public class AuthenticationService {
                 .getBody();
     }
 
-
-
-
     /**
      * Return (salt + password) hashed with SHA-512.
      *
@@ -91,5 +86,28 @@ public class AuthenticationService {
     private String hashPassword(String password) {
         return DigestUtils.sha512Hex(salt + password);
 
+    }
+    
+    public UserToken signup(String email, String password, String name, String message)
+    {
+    	//check if user is actually new (by email)
+    	User user = userService.getUser(email);
+    	UserToken token = null;
+    	if (user == null)
+    	{//new User
+    		String hashedPassword = hashPassword(password);
+    		
+    		userService.insertNewUser(email, hashedPassword, name, message);
+    		token = login(email, password); 
+    		if( token != null)
+    			LOG.info("New User succesfully created and logged in");
+    		else
+    			LOG.error("Signup failed: could not retrieve new user from DB");
+    	}
+    	else
+    	{//user already in DB
+    		LOG.error("User with email={} already exists", email);
+    	}
+    	return token;
     }
 }

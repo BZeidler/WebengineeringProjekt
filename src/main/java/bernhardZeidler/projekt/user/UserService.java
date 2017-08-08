@@ -71,4 +71,23 @@ public class UserService {
         LOG.debug("Retrieving user from database. user={}", email);
         return userRepository.findByEmailAndPassword(email, password);
     }
+    
+    public User getUser(String email) {
+        LOG.debug("Retrieving user from database. user={}", email);
+        return userRepository.findByEmail(email);
+    }
+
+
+	public void insertNewUser(String email, String password, String name, String message)
+	{
+		LOG.debug("Inserting new User into DB: ");
+		User u = new User();
+		u.setEmail(email);
+		u.setPassword(password);
+		u.setName(name);
+		u.setMessage(message);
+		userRepository.save(u);
+	}
+    
+
 }

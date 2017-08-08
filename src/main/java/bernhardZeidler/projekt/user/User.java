@@ -10,13 +10,19 @@ import javax.persistence.Id;
 // fine locally but not after we deploy the application on heroku.
 @Entity(name = "User_")
 public class User {
-    @Id
-    @GeneratedValue
+    
+    
+	@Id
+	@GeneratedValue
     private Long id;
 
     private String email;
     @JsonIgnore
     private String password;
+
+	private String name;
+    
+    private String message;
 
     public String getEmail() {
         return email;
@@ -41,6 +47,22 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
     // See https://stackoverflow.com/questions/17027777/relationship-between-hashcode-and-equals-method-in-java for
     // an explanation why we override both equals() and hashCode().
@@ -69,6 +91,8 @@ public class User {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", name=" + name + '\'' +
+                ", message=" + message + '\'' +
                 '}';
     }
 
