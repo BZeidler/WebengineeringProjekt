@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bernhardZeidler.projekt.user.User;
 import bernhardZeidler.projekt.user.UserRepository;
+import bernhardZeidler.projekt.user.UserService;
 
 @Service
 public class MatchMakingService {
@@ -16,6 +18,12 @@ public class MatchMakingService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private MatchMakingRepository matchRepository;
 	
 	public static class Suggestion
 	{
@@ -29,7 +37,10 @@ public class MatchMakingService {
 			return ret;
 		}
 	}
-	
+	/**
+	 * Find a suggestion for a match
+	 * @return the suggested match
+	 */
 	public Suggestion findMatch() {
 		LOG.info("Finding match");
 		List<Long> ids = userRepository.findAllIds();
@@ -43,5 +54,19 @@ public class MatchMakingService {
 		
 		LOG.info("Suggested sugestion={}", suggestion);
 		return suggestion;
+	}
+	
+	/**
+	 * likes a user by setting the apropriate state in the DB
+	 * @param targetId the user id of the "liked" user
+	 * 
+	 * @return true if successful
+	 */
+	public boolean like(Long target)
+	{
+		Long initiator = userService.getCurrentUser().getId();
+		MatchStatus status = new MatchStatus(initiator, target, 'L');
+		matchRepository.save(status);
+		return true;
 	}
 }
