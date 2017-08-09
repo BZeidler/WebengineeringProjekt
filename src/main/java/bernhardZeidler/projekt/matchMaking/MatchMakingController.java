@@ -23,6 +23,9 @@ public class MatchMakingController
 	@RequestMapping(value = "/matching/find", method = RequestMethod.GET)
 	public Suggestion findMatch()
 	{
+		if(userService.isAnonymous())
+			return null;
+		
 		return matchService.findMatch();	
 	}
 	

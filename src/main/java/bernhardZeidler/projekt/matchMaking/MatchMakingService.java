@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import bernhardZeidler.projekt.user.User;
 import bernhardZeidler.projekt.user.UserRepository;
 import bernhardZeidler.projekt.user.UserService;
 
@@ -43,15 +42,25 @@ public class MatchMakingService {
 	 */
 	public Suggestion findMatch() {
 		LOG.info("Finding match");
-		List<Long> ids = userRepository.findAllIds();
+		Long self = userService.getCurrentUser().getId();
+		List<Long> ids = matchRepository.findPrioritySuggestion(self);
+		LOG.info("Priority List ={}", ids);
+		
+		//nobody liked self, find new people
+		if(ids.size() == 0)
+			ids = matchRepository.findNewSuggestion(self);
+		
 		//get random user id
-		int index = (int)(Math.random() * ids.size());
-		Long id = ids.get(index);
-		
-		Suggestion suggestion = new Suggestion();
-		suggestion.id = id;
-		suggestion.message = userRepository.getTextByID(id);
-		
+		Suggestion suggestion = null;
+		if( ids.size() > 0)
+		{
+			int index = (int)(Math.random() * ids.size());
+			Long id = ids.get(index);
+			
+			suggestion = new Suggestion();
+			suggestion.id = id;
+			suggestion.message = userRepository.getTextByID(id);
+		}
 		LOG.info("Suggested sugestion={}", suggestion);
 		return suggestion;
 	}
@@ -72,7 +81,7 @@ public class MatchMakingService {
 	}
 
 	/**
-	 * likes a user by setting the apropriate state in the DB
+	 * dislikes a user by setting the apropriate state in the DB
 	 * @param targetId the user id of the "liked" user
 	 * 
 	 * @return true if successful
