@@ -18,7 +18,7 @@ public class JWTConfiguration {
     public FilterRegistrationBean jwtFilter() {
         FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setFilter(new JWTFilter(authenticationService, userService));
-        bean.addUrlPatterns("/api/*");
+        bean.addUrlPatterns("/matching/*");
         return bean;
     }
 }
