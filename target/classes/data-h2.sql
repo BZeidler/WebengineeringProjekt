@@ -2,18 +2,30 @@
 -- https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-initialize-a-database-using-spring-jdbc
 -- for explanation. This is a cool spring feature :-).
 
+-- Empty tables
+DELETE FROM LIKES;
+DELETE FROM DISLIKES;
+DELETE FROM MATCHES;
 
--- Remove everything.
--- DELETE FROM POST_COMMENTS;
--- DELETE FROM COMMENT;
--- DELETE FROM POST;
---DELETE FROM USER_;
+DELETE FROM USER_;
+-- paswords are first 3 letters of the name, for example "ara" (without the "'s )for aragorn
+INSERT INTO USER_ (EMAIL, PASSWORD, NAME, MESSAGE) 
+VALUES('aragorn@rivendell.net', '277e9a67bc99452594fe8e6593ea86cc94505a8946870ebb8944a2fcf20d4f5f41232f862d43889b40e91de8d8069e78709205afb76d842abe5e75adce35b45c', 'Aragorn', 'I can avoid being seen if I wish, but to disappear entirely, that is a rare gift'); 
+INSERT INTO USER_ (EMAIL, PASSWORD, NAME, MESSAGE) 
+VALUES('arwen@rivendell.net', '944a0245c2a79c1bca06f30c6294f7a4d0f821ec9ed4f8e3884bda9d29200754aff7d6dec4a7e61975e8a265e407de41345994b1e81406ea0d633c13b23ae772', 'Arwen', 'I choose a mortal life. ');
+INSERT INTO USER_ (EMAIL, PASSWORD, NAME, MESSAGE) 
+VALUES('gimli@bluemountains.net', '4cf76e5dd839ca100ff5bc2a493dd712f41e450df988e499a24cc4f65cf24e5dfe8acdf2c725ecffea074ac984b65b1c86b2c8f38c1f93601a29474e40bc6264', 'Gimli', 'That still only counts as one!');
+INSERT INTO USER_ (EMAIL, PASSWORD, NAME, MESSAGE) 
+VALUES('legolas@mirkwood.net', '6909d26ff8c179c043077cec93668a788b54bf2c43415d04e6d49881ad6e17387d6516860928137da04bd5989debb237b844bedde46b9f93221b4f1f3f434913', 'Legolas', 'They´re taking the hobbits to Isengard');
+INSERT INTO USER_ (EMAIL, PASSWORD, NAME, MESSAGE) 
+VALUES('sauron@isengard.net', 'eb5044d932daffa73c84ca3168aa8c30a4534dd00712662734397f9165552d1cbface6d71285785311377f81b796df8820ee59ef8e80fff290a98113fe1d6b28', 'Sauron', 'Build me an army worthy of Mordor');
+INSERT INTO USER_ (EMAIL, PASSWORD, NAME, MESSAGE) 
+VALUES('saruman@mordor.net', '95f45463a4f1d0930a58dacb7f183af6bfa745fd4ec3f652107898b3f9d8415ffe2f046a44f9b167899f9da80814b9b17da886269f33c9e1be58e8942a6daf7a', 'Saruman', 'There will be no dawn... for men. ');
+INSERT INTO USER_ (EMAIL, PASSWORD, NAME, MESSAGE) 
+VALUES('grima@rohan.net', 'd7e5edf2cfa564b98514692ef18dd78c9265ef29eb077bd6a8997e4b80816f3ab8e853c589cb50321df44367058eb7c0547eb7116209b5afeff3ba33c92815ac', 'Grima', 'But my lord ther is no such force!');
+INSERT INTO USER_ (EMAIL, PASSWORD, NAME, MESSAGE) 
+VALUES('eowyn@rohan.net', '9ecfd5c6cd2d0ed211b378b650bca4eb8b3025d214f7458e8dcd5dad986ab71029a858ddd5a15c42d725a678ad591ebc91840bd9be40443b975d761c21f22b28', 'Eowyn', 'I am no man!');
 
-
--- Insert new users.
---INSERT INTO USER_ (id, email, PASSWORD) VALUES
-  --(1, 'michael', 'c5ce3a9cb904b362072cabbdaeef90d5bd73680a478b509ebf1d013b4ad77b92e7706114a5bbbf160715396606e01fbfb2cc4ef5bffef4cfd0dea74ca04f2f5f'), -- foo
-  --(2, 'kai',     '9036c1111fdcbfa01a60a3f5d4647e7369caf5153b5e65eb7f45688748d070157fe9b62650ee564fbbcb42e6efc79df3238b8e1c10325b2e998f6d882e4d2071');     -- bar
 
 -- Add some posts.
 -- Used search terms "h2 timestamp", the second link lead to parsedatetime.
@@ -21,15 +33,3 @@
 --INSERT INTO POST (ID, TITLE, CREATED_AT, AUTHOR_ID) VALUES
   --(1, 'title-1', parsedatetime('2017-05-20 05:01', 'yyyy-MM-dd HH:mm'), 1),
   --(2, 'title-2', parsedatetime('2017-05-21 12:01', 'yyyy-MM-dd HH:mm'), 2);
-
--- Add some comments.
---INSERT INTO COMMENT (ID, CREATED_AT, AUTHOR_ID, TEXT) VALUES
-  --(1, parsedatetime('2017-05-20 05:01', 'yyyy-MM-dd HH:mm'), 1, 'comment-1'),
-  --(2, parsedatetime('2017-05-20 06:01', 'yyyy-MM-dd HH:mm'), 1, 'comment-2'),
-  --(3, parsedatetime('2017-05-20 05:01', 'yyyy-MM-dd HH:mm'), 2, 'comment-3');
-
--- Link posts and comments.
---INSERT INTO POST_COMMENTS (POST_ID, COMMENTS_ID) VALUES
---  (1, 1),
---  (1, 2),
---  (2, 3);
