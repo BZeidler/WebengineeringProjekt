@@ -67,6 +67,7 @@ public class MatchMakingService {
 		Long initiator = userService.getCurrentUser().getId();
 		MatchStatus status = new MatchStatus(initiator, target, 'L');
 		matchRepository.save(status);
+		LOG.info("Stored 'Like' state={}", status);
 		return true;
 	}
 }
