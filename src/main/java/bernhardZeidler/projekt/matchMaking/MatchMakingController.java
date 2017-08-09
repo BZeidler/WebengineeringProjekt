@@ -42,4 +42,16 @@ public class MatchMakingController
 		else
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
+	
+	@RequestMapping(value = "/matching/dislike", method = RequestMethod.POST)
+	public ResponseEntity<Object> dislike(@RequestBody IdContainer id)
+	{
+		if(userService.isAnonymous())
+			return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		
+		if( matchService.dislike( id.id) )
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		else
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
+	}
 }

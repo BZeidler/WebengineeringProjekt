@@ -70,4 +70,19 @@ public class MatchMakingService {
 		LOG.info("Stored 'Like' state={}", status);
 		return true;
 	}
+
+	/**
+	 * likes a user by setting the apropriate state in the DB
+	 * @param targetId the user id of the "liked" user
+	 * 
+	 * @return true if successful
+	 */
+	public boolean dislike(Long target)
+	{
+		Long initiator = userService.getCurrentUser().getId();
+		MatchStatus status = new MatchStatus(initiator, target, 'D');
+		matchRepository.save(status);
+		LOG.info("Stored 'Like' state={}", status);
+		return true;
+	}
 }
