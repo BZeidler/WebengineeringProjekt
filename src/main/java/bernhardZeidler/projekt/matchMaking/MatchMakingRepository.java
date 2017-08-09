@@ -21,6 +21,7 @@ public interface MatchMakingRepository extends CrudRepository<MatchStatus, Long>
 			+ "WHERE u.id NOT IN "
 			+ "(SELECT m.initiator_Id FROM MatchStatus m "
 			+ "WHERE m.target_Id = :self "
-			+ "AND m.state = 'D')")
+			+ "AND m.state = 'D')"
+			+ "AND u.id != :self")
 	List<Long> findNewSuggestion(@Param("self") Long self);
 }
