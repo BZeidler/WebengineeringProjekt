@@ -3,9 +3,11 @@
 -- for explanation. This is a cool spring feature :-).
 
 -- Empty tables
+DELETE FROM CHAT_MESSAGES;
 DELETE FROM MATCH_STATUS;
 DELETE FROM USER_;
 
+-- quotes copied from IMDB pages of each character
 -- paswords are first 3 letters of the name, for example "ara" (without the "'s )for aragorn
 INSERT INTO USER_ (ID, EMAIL, PASSWORD, NAME, MESSAGE)
 VALUES(1,'aragorn@rivendell.net', '277e9a67bc99452594fe8e6593ea86cc94505a8946870ebb8944a2fcf20d4f5f41232f862d43889b40e91de8d8069e78709205afb76d842abe5e75adce35b45c', 'Aragorn', 'I can avoid being seen if I wish, but to disappear entirely, that is a rare gift');
@@ -32,6 +34,10 @@ INSERT INTO MATCH_STATUS(ID, INITIATOR_ID, TARGET_ID, STATE) VALUES(5, 5, 6, 'L'
 INSERT INTO MATCH_STATUS(ID, INITIATOR_ID, TARGET_ID, STATE) VALUES(6, 6, 7, 'L');
 INSERT INTO MATCH_STATUS(ID, INITIATOR_ID, TARGET_ID, STATE) VALUES(7, 7, 8, 'L');
 INSERT INTO MATCH_STATUS(ID, INITIATOR_ID, TARGET_ID, STATE) VALUES(8, 8, 1, 'L');
+
+INSERT INTO CHAT_MESSAGES(ID, AUTHOR_ID, MATCH_ID, CREATED_AT, MESSAGE) VALUES(1, 2, 1, parsedatetime('2017-05-20 05:01', 'yyyy-MM-dd HH:mm'), 'Why do you fear the past? You are Isildurs heir, not Isildur himself. You are not bound to his fate. ');
+INSERT INTO CHAT_MESSAGES(ID, AUTHOR_ID, MATCH_ID, CREATED_AT, MESSAGE) VALUES(2, 1, 1, parsedatetime('2017-05-20 05:02', 'yyyy-MM-dd HH:mm'), 'The same blood flows in my veins. The same weakness.');
+INSERT INTO CHAT_MESSAGES(ID, AUTHOR_ID, MATCH_ID, CREATED_AT, MESSAGE) VALUES(3, 2, 1, parsedatetime('2017-05-20 05:03', 'yyyy-MM-dd HH:mm'), 'Your time will come. You will face the same evil, and you will defeat it.');
 
 -- Add some posts.
 -- Used search terms "h2 timestamp", the second link lead to parsedatetime.
