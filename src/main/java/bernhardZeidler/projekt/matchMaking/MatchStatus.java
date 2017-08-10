@@ -25,7 +25,6 @@ public class MatchStatus
 	@GeneratedValue
 	private Long id;
 	
-	
 	private Long initiator_Id;
 	
 	private Long target_Id;
