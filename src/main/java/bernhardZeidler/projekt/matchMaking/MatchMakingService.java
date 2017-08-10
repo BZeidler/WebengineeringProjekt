@@ -1,6 +1,7 @@
 package bernhardZeidler.projekt.matchMaking;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bernhardZeidler.projekt.chat.ChatRepository;
+import bernhardZeidler.projekt.matchMaking.MatchMakingController.Match;
 import bernhardZeidler.projekt.user.UserRepository;
 import bernhardZeidler.projekt.user.UserService;
 
@@ -23,6 +26,9 @@ public class MatchMakingService {
 	
 	@Autowired
 	private MatchMakingRepository matchRepository;
+	
+	@Autowired
+	private ChatRepository chatRepository;
 	
 	public static class Suggestion
 	{
@@ -107,5 +113,23 @@ public class MatchMakingService {
 		matchRepository.save(status);
 		LOG.info("Stored 'Like' state={}", status);
 		return true;//TODO: return benötigt?
+	}
+
+	public List<Match> getMatches() {
+		Long self = userService.getCurrentUser().getId();
+		List<MatchStatus> matchList = matchRepository.findMatchesByUser(self);
+		List<Match> matches = new ArrayList<>();
+		for (MatchStatus match : matchList) 
+		{
+			Match m = new Match();
+			m.id = match.getId();
+			if(match.getInitiator() == self)
+				m.name = userRepository.findById( match.getTarget() ).getName();
+			else
+				m.name = userRepository.findById( match.getInitiator() ).getName();
+			m.lastMessage = chatRepository.getLastMessageFromMatch(m.id);
+			matches.add(m);
+		}
+		return matches;
 	}
 }

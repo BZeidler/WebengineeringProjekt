@@ -10,6 +10,12 @@ import bernhardZeidler.projekt.user.User;
 
 public interface MatchMakingRepository extends CrudRepository<MatchStatus, Long>
 {
+	@Query("SELECT m FROM MatchStatus m "
+			+ "WHERE (m.initiator_Id = :self "
+			+ "OR m.target_Id = :self) "
+			+ "AND m.state = 'M'")
+	List<MatchStatus> findMatchesByUser(@Param("self") Long self);
+	
 	@Query("SELECT m FROM MatchStatus m WHERE m.id = :id")
 	MatchStatus findByID(@Param("id") Long id);
 	

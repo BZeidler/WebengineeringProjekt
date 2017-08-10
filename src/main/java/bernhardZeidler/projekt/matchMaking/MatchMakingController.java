@@ -1,5 +1,7 @@
 package bernhardZeidler.projekt.matchMaking;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import bernhardZeidler.projekt.chat.ChatMessages;
 import bernhardZeidler.projekt.matchMaking.MatchMakingService.Suggestion;
 import bernhardZeidler.projekt.user.UserService;
 
@@ -57,5 +60,19 @@ public class MatchMakingController
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		else
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
+	}
+	
+	public static class Match
+	{
+		public Long id;
+		public String name;
+		public ChatMessages lastMessage;
+	}
+	@RequestMapping(value ="/list", method = RequestMethod.GET )
+	public List<Match> list()
+	{
+		if( !userService.isAnonymous() )
+			return matchService.getMatches();
+		return null;
 	}
 }
