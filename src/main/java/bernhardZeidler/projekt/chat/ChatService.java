@@ -1,9 +1,14 @@
 package bernhardZeidler.projekt.chat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
 
 import bernhardZeidler.projekt.chat.ChatController.NewChatMessage;
 import bernhardZeidler.projekt.matchMaking.MatchMakingRepository;
@@ -40,5 +45,36 @@ public class ChatService {
 		
 		chatRepository.save(msg);
 		LOG.info("Storing new ChatMessage={}", msg);
+	}
+
+	public List<ChatMessages> getMessages(Long matchId) {
+		List<ChatMessages> tmpList = chatRepository.getMessages(matchId);
+		return filterInvalidMessages(tmpList);
+	}
+	
+	/**
+	 * Filters a list so it only contains chat messages a user should be able to see.
+	 * Should be superfluous if entries are stored correctly in DB, but you never know.
+	 * @param filterList
+	 * @return the filtered list
+	 */
+	private List<ChatMessages> filterInvalidMessages(List<ChatMessages> filterList)
+	{
+		List<ChatMessages> invalidMessages = new ArrayList<>();
+		Long self = userService.getCurrentUser().getId();
+		
+		for (ChatMessages chatMessages : filterList) 
+		{
+			Long searchId = chatMessages.getMatch_Id();
+			MatchStatus state = matchRepository.findByID(searchId);
+			if( state.getInitiator() != self && state.getTarget() != self )
+				invalidMessages.add(chatMessages);
+		}
+		
+		for (ChatMessages chatMessages : invalidMessages) 
+		{
+			filterList.remove(chatMessages);
+		}
+		return filterList;
 	}
 }
