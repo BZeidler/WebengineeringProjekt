@@ -12,6 +12,7 @@ import bernhardZeidler.projekt.matchMaking.MatchMakingService.Suggestion;
 import bernhardZeidler.projekt.user.UserService;
 
 @RestController
+@RequestMapping("/api/matching")
 public class MatchMakingController 
 {
 	@Autowired
@@ -20,7 +21,7 @@ public class MatchMakingController
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "/matching/find", method = RequestMethod.GET)
+	@RequestMapping(value = "/find", method = RequestMethod.GET)
 	public Suggestion findMatch()
 	{
 		if(userService.isAnonymous())
@@ -34,7 +35,7 @@ public class MatchMakingController
 		public long id;
 	}
 	
-	@RequestMapping(value = "/matching/like", method = RequestMethod.POST)
+	@RequestMapping(value = "/like", method = RequestMethod.POST)
 	public ResponseEntity<Object> like(@RequestBody IdContainer id)
 	{
 		if(userService.isAnonymous())
@@ -46,7 +47,7 @@ public class MatchMakingController
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 	}
 	
-	@RequestMapping(value = "/matching/dislike", method = RequestMethod.POST)
+	@RequestMapping(value = "/dislike", method = RequestMethod.POST)
 	public ResponseEntity<Object> dislike(@RequestBody IdContainer id)
 	{
 		if(userService.isAnonymous())
