@@ -42,7 +42,7 @@ Alle Daten die in irgendeiner Form in der DB gespeichert werden müssen, sortier
 - List Matches
   - ~~Vorhandene Matches, Paar von 2 Nutzern~~
 - Chatting
-  - Chatverlauf: Autor, TimeStamp, Text
+  - ~~Chatverlauf: Autor, TimeStamp, Text~~
   
 ### Benötigt im Backend (Java)
 - Funktion SignUp
@@ -51,16 +51,16 @@ Alle Daten die in irgendeiner Form in der DB gespeichert werden müssen, sortier
 - ~~Funktion Login (theor. Fertig aus VL ?)~~
   - ???
 - Funktion findMatch
-  - Rückgabe Nutzer/Text (laden aus DB)
-  - Falls "likedBy" !leer (laden aus DB)
-    - ersten Eintrag wählen
-    - Sonst anderen Nutzer/Text, wobei 
-      - Nutzer nicht in Like && Nutzer nicht in Dislike
+  - ~~Rückgabe Nutzer/Text (laden aus DB)~~
+  - ~~Falls "likedBy" !leer (laden aus DB)~~
+    - ~~ersten Eintrag wählen~~
+    - ~~Sonst anderen Nutzer/Text, wobei~~ 
+      - ~~Nutzer nicht in Like && Nutzer nicht in Dislike~~
     - Sonderfall: es gibt keine neuen Texte (Alle liked, disliked)
     	- ??? 
 - Funktion listMatch
   - Rückgabe aller Matches (laden aus DB)
   - Ausserdem letzter Timestamp + Chatnachricht (laden aus DB, Chat)
-- Funkltion Chat
-  - Anzeige/Rückgabe Verlauf (laden aus DB)
-  - neue Nachricht senden (Eintrag in DB)
+- ~~Funkltion Chat~~
+  - ~~Anzeige/Rückgabe Verlauf (laden aus DB)~~
+  - ~~neue Nachricht senden (Eintrag in DB)~~
