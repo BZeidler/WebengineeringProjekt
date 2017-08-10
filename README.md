@@ -35,12 +35,12 @@ Hier steht tatsächlich eher eine Textfassung der Anforderungen an das Projekt. 
 ### Benötigt im Backend (DB)
 Alle Daten die in irgendeiner Form in der DB gespeichert werden müssen, sortiert nach Funktionen.
 -  ~~SignUp: neuer Nutzer: Anzeige Name(?), Mail, PW, Text~~
-- Find Match
+- ~~Find Match~~
   - ~~like Texte/Nutzer (soll nicht nocheinmal gezeigt werden)~~
   - ~~dislike Texte/Nutzer (soll nicht nocheinmal gezeigt werden)~~
   - ~~likedBy (priorisierung dieser Texte)~~(bereits enthalten in like, keine Änderung)
-- List Matches
-  - Vorhandene Matches, Paar von 2 Nutzern
+- ~~List Matches~~
+  - ~~Vorhandene Matches, Paar von 2 Nutzern~~
 - ~~Chatting~~
   - ~~Chatverlauf: Autor, TimeStamp, Text~~
   
@@ -58,9 +58,9 @@ Alle Daten die in irgendeiner Form in der DB gespeichert werden müssen, sortier
       - ~~Nutzer nicht in Like && Nutzer nicht in Dislike~~
     - ~~Sonderfall: es gibt keine neuen Texte (Alle liked, disliked)~~
     	- ~~???~~ 
-- Funktion listMatch
-  - Rückgabe aller Matches (laden aus DB)
-  - Ausserdem letzter Timestamp + Chatnachricht (laden aus DB, Chat)
+- ~~Funktion listMatch~~
+  - ~~Rückgabe aller Matches (laden aus DB)~~
+  - ~~Ausserdem letzter Timestamp + Chatnachricht (laden aus DB, Chat)~~
 - ~~Funkltion Chat~~
   - ~~Anzeige/Rückgabe Verlauf (laden aus DB)~~
   - ~~neue Nachricht senden (Eintrag in DB)~~
