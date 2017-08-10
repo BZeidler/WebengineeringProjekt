@@ -74,7 +74,21 @@ public class MatchMakingService {
 	public boolean like(Long target)
 	{
 		Long initiator = userService.getCurrentUser().getId();
-		MatchStatus status = new MatchStatus(initiator, target, 'L');
+		//is there a "like" from current target to current initiator?
+		MatchStatus status = matchRepository.findExistingState(target, initiator);
+		
+		if( status != null)
+		{
+			//just to be save
+			if(status.getState() == 'D')
+				return false; 
+			
+			matchRepository.delete(status.getId());
+			status.setState('M');//both like each other now
+			matchRepository.save(status);
+			return true;
+		}
+		status = new MatchStatus(initiator, target, 'L');
 		matchRepository.save(status);
 		LOG.info("Stored 'Like' state={}", status);
 		return true;

@@ -24,4 +24,7 @@ public interface MatchMakingRepository extends CrudRepository<MatchStatus, Long>
 			+ "AND m.state = 'D')"
 			+ "AND u.id != :self")
 	List<Long> findNewSuggestion(@Param("self") Long self);
+	
+	@Query("SELECT s FROM MatchStatus s WHERE s.initiator_Id = :initiator AND s.target_Id = :target")
+	MatchStatus findExistingState(@Param("initiator") Long initiator, @Param("target") Long target );
 }

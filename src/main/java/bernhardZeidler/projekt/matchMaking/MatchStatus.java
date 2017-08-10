@@ -30,9 +30,16 @@ public class MatchStatus
 	
 	private Long target_Id;
 	
-	//aktuell geplant: 3 Status: L, D und M, daher Länge 1
+	//aktuell geplant: 3 Status: L, D und M, (+1 Invalid, Default cTor)daher Länge 1
 	@Column(length = 1)
 	private char state;
+	
+	public MatchStatus() 
+	{
+		this.initiator_Id = -1L;
+		this.target_Id = -1L;
+		this.state = 'I';
+	}
 	
 	public MatchStatus(Long initiator, Long target, char state)
 	{
