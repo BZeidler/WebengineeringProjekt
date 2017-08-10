@@ -106,6 +106,6 @@ public class MatchMakingService {
 		MatchStatus status = new MatchStatus(initiator, target, 'D');
 		matchRepository.save(status);
 		LOG.info("Stored 'Like' state={}", status);
-		return true;
+		return true;//TODO: return benötigt?
 	}
 }

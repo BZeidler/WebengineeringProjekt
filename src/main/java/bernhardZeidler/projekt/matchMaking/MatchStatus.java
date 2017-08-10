@@ -30,7 +30,7 @@ public class MatchStatus
 	
 	private Long target_Id;
 	
-	//aktuell geplant: 3 Status: L, D und M, (+1 Invalid, Default cTor)daher Länge 1
+	//aktuell geplant: 3 Status: L, D und M, (+1 Invalid in Default cTor)daher Länge 1
 	@Column(length = 1)
 	private char state;
 	
