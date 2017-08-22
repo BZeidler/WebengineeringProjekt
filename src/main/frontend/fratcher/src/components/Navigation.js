@@ -23,8 +23,16 @@ class Navigation extends React.Component {
                 <a className="nav-link disabled" href="#">Disabled</a>
               </li>
             </ul>
-
-            <a className="navbar-nav Login" href="#">Login</a>
+              <ul className="nav navbar-nav navbar-right">
+                  {
+                    User.isNotAuthenticated() &&
+                    <li><Link to="/user/login">Login</Link></li>
+                  }
+                  {
+                      User.isAuthenticated() &&
+                      <li><Link to="/user/login">{User.email}</Link></li>
+                  }
+              </ul>
           </div>
 
         </nav>
@@ -32,13 +40,4 @@ class Navigation extends React.Component {
       );
     }
   }
-  //
-  //z13 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> -->
-  //    <span className="navbar-toggler-icon"></span>
-  // </button>
-  //
-  //z26 <form className="form-inline my-2 my-lg-0">
-  //   <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/ >
-  //      <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  // </form>
   export default Navigation;
