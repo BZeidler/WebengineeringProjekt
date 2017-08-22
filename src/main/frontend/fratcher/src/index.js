@@ -12,8 +12,6 @@ import Navigation from './components/Navigation'
 import Authentication from './components/Authentication'
 import registerServiceWorker from './registerServiceWorker';
 
-import './index.css';
-
 class Root extends React.Component {
     constructor(props) {
         super(props);
@@ -31,7 +29,6 @@ class Root extends React.Component {
     render() {
         return (
             <div>
-              <App/>
                 <Navigation ref={(component) => {
                     this.nav = component;
                 }}/>
