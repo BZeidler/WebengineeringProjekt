@@ -1,6 +1,5 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import './Navigation.css';
 import User from "../util/User";
 
 class Navigation extends React.Component {
