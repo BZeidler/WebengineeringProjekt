@@ -17,11 +17,13 @@ class User {
     }
 
     set(data) {
+        this.name = data.name;
         this.email = data.email;
         this.id = data.id;
     }
 
     reset() {
+        this.name = undefined;
         this.email = undefined;
         this.id = -1;
     }
