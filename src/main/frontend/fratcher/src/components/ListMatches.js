@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import User from "../util/User";
+import {withRouter} from 'react-router-dom'
 
 class MatchList extends React.Component {
    constructor(props) {
@@ -21,17 +22,16 @@ class MatchList extends React.Component {
          })
       });
    }
-
-
+   
    handleClick(id) {
       //TODO: open chat
-      //this.props.history.push(`/post/${id}`);
+      this.props.history.push(`/chat/load/${id}`);
    }
 
    renderPosts() {
       return this.state.matches.map((match => {
          let isAuthor = false;
-         if (User.isAuthenticated && User.id == match.author.id) {
+         if (User.isAuthenticated && User.id == match.lastMessage.author_Id) {
             isAuthor = true;
          }
 
@@ -48,9 +48,9 @@ class MatchList extends React.Component {
 
          return (
             <tr key={match.lastMessage.message} onClick={() => this.handleClick(match.id)} className={isAuthor ? 'success' : ''}>
-               <td>match.name</td>
+               <td>{match.name}</td>
                <td>{date}</td>
-               <td>match.lastMessage.message</td>
+               <td>{match.lastMessage.message}</td>
                <td>{author}</td>
             </tr>
          );
@@ -65,8 +65,8 @@ class MatchList extends React.Component {
                <thead>
                   <tr>
                      <th className="col-sm-2">Match Name</th>
-                     <th className="col-sm-8">Date</th>
-                     <th className="col-sm-2">Last Message</th>
+                     <th className="col-sm-2">Date</th>
+                     <th className="col-sm-6">Last Message</th>
                      <th className="col-sm-2">Author</th>
                   </tr>
                </thead>
@@ -80,4 +80,4 @@ class MatchList extends React.Component {
 }
 
 
-export default MatchList;
+export default withRouter(MatchList);
