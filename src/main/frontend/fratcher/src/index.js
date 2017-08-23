@@ -38,7 +38,7 @@ class Root extends React.Component {
                     <Route path="/user/login"
                            render={(props) => (
                                <Authentication {...props} updateAuthentication={this.updateAuthentication}/> )}/>
-
+                    <Route path="api/matching" component={MatchList}/>
                 </Switch>
             </div>
         );
