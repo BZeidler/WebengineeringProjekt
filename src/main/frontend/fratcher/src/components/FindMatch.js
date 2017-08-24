@@ -9,8 +9,8 @@ class FindMatch extends React.Component {
       this.state = {
          suggestion: undefined
       }
-
-      this.handleClick = this.handleClick.bind(this);
+      this.handleLike = this.handleLike.bind(this);
+      this.handleDislike = this.handleDislike.bind(this);
    }
 
    // This function is called before render() to initialize its state.
@@ -20,13 +20,27 @@ class FindMatch extends React.Component {
          this.setState({suggestion: data})
       });
    }
-
-
-   handleClick(id) {
-      //TODO: open chat
-      //this.props.history.push(`/post/${id}`);
+   handleLike(event){
+      const suggestion=this.state.suggestion;
+      axios.post('/api/matching/like',
+         {
+            id: suggestion.id
+         }).then((data) => {
+            this.props.history.push("/");
+         }
+      );
    }
-
+   handleDislike(event){
+      const suggestion=this.state.suggestion;
+      axios.post('/api/matching/dislike',
+         {
+            id: suggestion.id
+         }).then((data) => {
+            this.props.history.push("/");
+         }
+      );
+   }
+      
    render() {
       const suggestion = this.state.suggestion
       if(!suggestion)
@@ -43,10 +57,19 @@ class FindMatch extends React.Component {
                   <tr><td>{suggestion.message}</td></tr>
                </tbody>
             </table>
+            <div>
+               <form onSubmit={this.handleLike}>
+                  <input type="submit" className="btn" value="Like"/>
+               </form>
+               <form onSubmit={this.handleDislike}>
+                  <input type="submit" className="btn" value="Disike"/>
+               </form>
+            </div>
          </div>
       );
    }
 }
+
 
 
 export default FindMatch;
