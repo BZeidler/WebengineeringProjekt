@@ -14,10 +14,10 @@ class ChatList extends React.Component {
 
    // This function is called before render() to initialize its state.
    componentWillMount() {
-      axios.get('/api/chat/load/${this.props.match.params.id}')
+      axios.get(`/api/chat/load/${this.props.match.params.id}`)
       .then(({data}) => {
          this.setState({
-            matches: data
+            messages: data
          })
       });
    }

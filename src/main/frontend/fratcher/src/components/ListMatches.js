@@ -25,7 +25,7 @@ class MatchList extends React.Component {
    
    handleClick(id) {
       //TODO: open chat
-      this.props.history.push(`/chat/load/${id}`);
+      this.props.history.push(`chat/load/${id}`);
    }
 
    renderPosts() {
