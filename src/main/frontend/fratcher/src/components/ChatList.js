@@ -6,10 +6,11 @@ class ChatList extends React.Component {
    constructor(props) {
       super();
       this.state = {
+         matchId: window.matchId,
          messages: []
       }
-
-      this.handleClick = this.handleClick.bind(this);
+      this.handleMessageChange = this.handleMessageChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
    }
 
    // This function is called before render() to initialize its state.
@@ -21,12 +22,23 @@ class ChatList extends React.Component {
          })
       });
    }
+    handleMessageChange(event) {
+        this.setState({message: event.target.value});
+    }
 
+    handleSubmit(event) {
+        event.preventDefault();
 
-   handleClick(id) {
-      //TODO: open chat
-      //this.props.history.push(`/post/${id}`);
-   }
+        axios.post('/api/chat/send',
+            {
+                matchId: this.state.matchId,
+                message: this.state.message
+            })
+            .then((data) => {
+                // Redirect to front page.
+                this.props.history.push("/");
+            });
+    }
 
    renderPosts() {
       return this.state.messages.map((message => 
@@ -56,12 +68,22 @@ class ChatList extends React.Component {
                   <tr>
                      <th className="col-sm-2">Date Name</th>
                      <th className="col-sm-6">Message</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  {this.renderPosts()}
-               </tbody>
+                     </tr>
+                 </thead>
+                 <tbody>
+                    {this.renderPosts()}
+                </tbody>
             </table>
+            <form onSubmit={this.handleSubmit}>
+               <div className="form-group">
+                  <label>
+                     New Message
+                  </label>
+                  <textarea className="form-control"
+                     onChange={this.handleMessageChange}/>
+               </div>
+               <input type="submit" className="btn btn-success" value="Submit"/>
+            </form>
          </div>
       );
    }

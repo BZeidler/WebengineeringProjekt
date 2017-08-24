@@ -25,6 +25,7 @@ class MatchList extends React.Component {
    
    handleClick(id) {
       //TODO: open chat
+      window.matchId=id;
       this.props.history.push(`chat/load/${id}`);
    }
 
