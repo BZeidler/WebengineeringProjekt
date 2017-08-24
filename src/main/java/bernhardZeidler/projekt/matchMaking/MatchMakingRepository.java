@@ -23,7 +23,9 @@ public interface MatchMakingRepository extends CrudRepository<MatchStatus, Long>
 			+ "WHERE u.id IN "
 			+ "(SELECT m.initiator_Id FROM MatchStatus m "
 			+ "WHERE m.target_Id = :self "
-			+ "AND m.state != 'D')")
+			+ "AND m.state != 'D'"
+			+ "AND m.state != 'M'"
+			+ ")")
 	List<Long> findPrioritySuggestion(@Param("self") Long self);
 	
 	@Query("SELECT u.id FROM User_ u "
