@@ -3,37 +3,39 @@ import {Link} from "react-router-dom";
 import User from "../util/User";
 
 class Navigation extends React.Component {
-  render() {
-    return (
+   updateAuthentication() {
+      // If we would store the authentication state in the component's state and reset the state,
+      // we would not have to do this.
+      this.forceUpdate();
+   }
+   render() {
+      return (
 
-      <div className="bd-example" data-example-id="">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <a className="navbar-brand" href="#">Navbar</a>
+         <div className="bd-example" data-example-id="">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+               <a className="navbar-brand" href="#">Navbar</a>
 
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
-                <a className="nav-link" href="/">Matches<span className="sr-only">(current)</span></a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/">Find People</a>
-              </li>
-            </ul>
-              <ul className="nav navbar-nav navbar-right">
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul className="navbar-nav mr-auto">
+                     <li className="nav-item"><a className="nav-link" href="/">Matches</a></li>
+                     <li className="nav-item">
+                        <Link className="nav-link" to="/matching/find">Find People</Link>
+                     </li>
+                  </ul>
+                  <ul className="nav navbar-nav navbar-right">
                   {
-                    User.isNotAuthenticated() &&
-                    <li><Link to="/user/login">Login</Link></li>
+                     User.isNotAuthenticated() &&
+                     <li><Link to="/user/login">Login</Link></li>
                   }
                   {
-                      User.isAuthenticated() &&
-                      <li><Link to="/user/login">{User.email}</Link></li>
+                     User.isAuthenticated() &&
+                     <li><Link to="/user/login">{User.email}</Link></li>
                   }
-              </ul>
-          </div>
-
-        </nav>
-      </div>
+                  </ul>
+               </div>
+            </nav>
+         </div>
       );
-    }
-  }
+   }
+}
   export default Navigation;
