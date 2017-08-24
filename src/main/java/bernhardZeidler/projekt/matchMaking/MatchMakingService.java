@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import bernhardZeidler.projekt.chat.ChatMessages;
 import bernhardZeidler.projekt.chat.ChatRepository;
 import bernhardZeidler.projekt.matchMaking.MatchMakingController.Match;
 import bernhardZeidler.projekt.user.UserRepository;
@@ -127,9 +128,19 @@ public class MatchMakingService {
 				m.name = userRepository.findById( match.getTarget() ).getName();
 			else
 				m.name = userRepository.findById( match.getInitiator() ).getName();
-			m.lastMessage = chatRepository.getLastMessageFromMatch(m.id);
+			m.lastMessage = getLastMessage(m.id);
 			matches.add(m);
 		}
 		return matches;
 	}
+	
+	private ChatMessages getLastMessage(Long matchId)
+	{
+		List<ChatMessages> messages = chatRepository.getMessages(matchId);
+		if(messages.size() > 0 )
+			return messages.get( messages.size() - 1);
+		else 
+			return null;
+	}
+	
 }
