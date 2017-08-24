@@ -13,6 +13,7 @@ import Authentication from './components/Authentication'
 import registerServiceWorker from './registerServiceWorker';
 import MatchList from './components/ListMatches'
 import ChatList from './components/ChatList'
+import FindMatch from './components/FindMatch'
 
 class Root extends React.Component {
     constructor(props) {
@@ -40,8 +41,10 @@ class Root extends React.Component {
                     <Route path="/user/login"
                            render={(props) => (
                                <Authentication {...props} updateAuthentication={this.updateAuthentication}/> )}/>
-                    <Route path="/" component={MatchList}/>
                     <Route path="/chat/load/:id" component={ChatList}/>
+                    <Route path="/matching/find" component={FindMatch}/>
+
+                    <Route path="/" component={MatchList}/>
                 </Switch>
             </div>
         );
