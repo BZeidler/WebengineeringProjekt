@@ -31,6 +31,18 @@ class MatchList extends React.Component {
    renderPosts() {
       return this.state.matches.map((match => {
          let isAuthor = false;
+
+         if(!match.lastMessage){
+            return (
+            <tr key={match.name} onClick={() => this.handleClick(match.id)} className={isAuthor ? 'success' : ''}>
+               <td>{match.name}</td>
+               <td/>
+               <td>No messages</td>
+               <td/>
+            </tr>
+         );
+         }
+         
          if (User.isAuthenticated && User.id == match.lastMessage.author_Id) {
             isAuthor = true;
          }
