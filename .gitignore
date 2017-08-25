@@ -1,6 +1,4 @@
-/target/test-classes/bernhardZeidler/projekt
-/target/classes/bernhardZeidler/projekt
 /test.mv.db.mv.db
 /test.mv.db.trace.db
 /test.trace.db
-/target/
+target
