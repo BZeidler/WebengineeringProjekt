@@ -8,29 +8,29 @@ Hier steht tatsächlich eher eine Textfassung der Anforderungen an das Projekt. 
 - Art StartSeite
   - SignUp
     - Eingabe e-Mail && PW && Nutzer-Text
-    - Danach: Auto Login || Startseite 
-  - Login
-    - Anzeige persönliche(?) Seite, aktiviereung/Verwendbarkeit von fratching Funktionen
+    - Danach: Auto Login(passiert im backend) || Startseite 
+  - ~~Login~~
+    - ~~Anzeige persönliche(?) Seite, aktiviereung/Verwendbarkeit von fratching Funktionen
 - Persönliche Seite
-  - Find Match
-      - Anzeige von neuem, unbekannten Text
-      - ggf priorisierung von "halben" Matches 
-        - voller Match: Nutzer A mag Nutzer B Text && vice versa
-        - halber Match: Nutzer A mag Nutzer B Text
-      - Like / Dislike
-        - Dislike speichern
-        - Like 
-          - Falls: Bisher Nutzer B mag Nutzer A, nun Nutzer A mag Nutzer B -> Match
-          - sonst: halber Match, ggf bei/für Gegenseite vermerken (für priorisierung)   
+  - ~~Find Match~~
+      - ~~Anzeige von neuem, unbekannten Text~~
+      - ~~ggf priorisierung von "halben" Matches(passiert im backend)~~
+        - ~~voller Match: Nutzer A mag Nutzer B Text && vice versa~~
+        - ~~halber Match: Nutzer A mag Nutzer B Text~~
+      - ~~Like / Dislike~~
+        - ~~Dislike speichern~~
+        - ~~Like(ebenfalls im backend)~~
+          - ~~Falls: Bisher Nutzer B mag Nutzer A, nun Nutzer A mag Nutzer B -> Match~~
+          - ~~sonst: halber Match, ggf bei/für Gegenseite vermerken (für priorisierung)~~   
         
-  - List Matches
-    - Anzeige aller vorhandenen (vollen) Matches
-      - Nutzername + TimeStamp + letzte chat Nachricht
-      - "Chatroom" betreten   
-  - Chatting
-    - Anzeige Name(Chat Partner)
-    - Anzeige TimeStamp + Chatnachrichten
-    - Eingabewidget + Button
+  - ~~List Matches~~
+    - ~~Anzeige aller vorhandenen (vollen) Matches~~
+      - ~~Nutzername + TimeStamp + letzte chat Nachricht~~
+      - ~~"Chatroom" betreten(anclicken)~~   
+  - ~~Chatting~~
+    - ~~Anzeige Name(Chat Partner)~~
+    - ~~Anzeige TimeStamp + Chatnachrichten~~
+    - ~~Eingabewidget + Button~~
   
 ### Benötigt im Backend (DB)
 Alle Daten die in irgendeiner Form in der DB gespeichert werden müssen, sortiert nach Funktionen.
