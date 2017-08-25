@@ -2,6 +2,7 @@ package bernhardZeidler.projekt.matchMaking;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import bernhardZeidler.projekt.chat.ChatMessages;
 import bernhardZeidler.projekt.chat.ChatRepository;
 import bernhardZeidler.projekt.matchMaking.MatchMakingController.Match;
+import bernhardZeidler.projekt.user.User;
 import bernhardZeidler.projekt.user.UserRepository;
 import bernhardZeidler.projekt.user.UserService;
 
@@ -55,7 +57,8 @@ public class MatchMakingService {
 		
 		//nobody liked self, find new people
 		if(ids.size() == 0)
-			ids = matchRepository.findNewSuggestion(self);
+			ids = findNewSuggestion(self);
+
 		
 		//get random user id
 		Suggestion suggestion = null;
@@ -72,6 +75,36 @@ public class MatchMakingService {
 		return suggestion;
 	}
 	
+	private List<Long> findNewSuggestion(Long self) {
+		List<Long> ret = new ArrayList<>();
+		List<MatchStatus> matches = matchRepository.findMatchStatesByUser(self);
+		HashMap<Long, User> users = getUsers();
+		
+		for (MatchStatus match : matches) {
+			if( users.containsKey(match.getInitiator()) )
+				users.remove(match.getInitiator());
+			if(users.containsKey(match.getTarget()) )
+				users.remove(match.getTarget());
+		}
+		
+		for (Long userId : users.keySet()) {
+			ret.add(userId);
+		}
+		
+		if(ret.contains(self))
+			ret.remove(self);
+		return ret;
+	}
+
+	private HashMap<Long, User> getUsers() {
+		HashMap<Long, User> ret = new HashMap<>();
+		Iterable<User> users = userRepository.findAll();
+		for (User user : users) {
+			ret.put(user.getId(), user);
+		}
+		return ret;
+	}
+
 	/**
 	 * likes a user by setting the apropriate state in the DB
 	 * @param targetId the user id of the "liked" user

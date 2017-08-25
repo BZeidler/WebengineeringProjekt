@@ -16,6 +16,12 @@ public interface MatchMakingRepository extends CrudRepository<MatchStatus, Long>
 			+ "AND m.state = 'M'")
 	List<MatchStatus> findMatchesByUser(@Param("self") Long self);
 	
+	@Query("SELECT m FROM MatchStatus m "
+			+ "WHERE (m.initiator_Id = :self "
+			+ "OR m.target_Id = :self) "
+			)
+	List<MatchStatus> findMatchStatesByUser(@Param("self") Long self);
+	
 	@Query("SELECT m FROM MatchStatus m WHERE m.id = :id")
 	MatchStatus findByID(@Param("id") Long id);
 	
@@ -28,14 +34,8 @@ public interface MatchMakingRepository extends CrudRepository<MatchStatus, Long>
 			+ ")")
 	List<Long> findPrioritySuggestion(@Param("self") Long self);
 	
-	@Query("SELECT u.id FROM User_ u "
-			+ "WHERE u.id NOT IN "
-			+ "(SELECT m.initiator_Id FROM MatchStatus m "
-			+ "WHERE m.target_Id = :self "
-			+ "AND m.state != 'D')"
-			+ "AND u.id != :self")
-	List<Long> findNewSuggestion(@Param("self") Long self);
 	
 	@Query("SELECT s FROM MatchStatus s WHERE s.initiator_Id = :initiator AND s.target_Id = :target")
 	MatchStatus findExistingState(@Param("initiator") Long initiator, @Param("target") Long target );
+	
 }
