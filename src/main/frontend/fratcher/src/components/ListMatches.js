@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
+import { translate, Trans } from 'react-i18next';
 import User from "../util/User";
-import {withRouter} from 'react-router-dom'
 
 class MatchList extends React.Component {
    constructor(props) {
@@ -72,15 +72,20 @@ class MatchList extends React.Component {
 
 
    render() {
+      const { t, i18n } = this.props;
+      
+      const changeLanguage = (lng) => {
+          i18n.changeLanguage(lng);
+      }
       return (
          <div className="component">
             <table className="table table-hover">
                <thead>
                   <tr>
-                     <th className="col-sm-2">Match Name</th>
-                     <th className="col-sm-2">Date</th>
-                     <th className="col-sm-6">Last Message</th>
-                     <th className="col-sm-2">Author</th>
+                     <th className="col-sm-2">{t('Match Name')}</th>
+                     <th className="col-sm-2">{t('Date')}</th>
+                     <th className="col-sm-6">{t('Last Message')}</th>
+                     <th className="col-sm-2">{t('Author')}</th>
                   </tr>
                </thead>
                <tbody>
@@ -93,4 +98,4 @@ class MatchList extends React.Component {
 }
 
 
-export default withRouter(MatchList);
+export default translate('common')(MatchList);
