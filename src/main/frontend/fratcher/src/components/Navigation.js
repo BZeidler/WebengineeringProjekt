@@ -22,16 +22,19 @@ class Navigation extends React.Component {
                         <Link className="nav-link" to="/matching/find">Find People</Link>
                      </li>
                   </ul>
-                  <ul className="nav navbar-nav navbar-right">
                   {
                      User.isNotAuthenticated() &&
-                     <li><Link to="/user/login">Login</Link></li>
+                     <ul className="nav navbar-nav navbar-right">
+                         <li><Link to="/user/login">Login</Link></li> 
+                         <li><Link to="/user/SignUp">SignUp</Link></li>
+                     </ul>
                   }
                   {
                      User.isAuthenticated() &&
-                     <li><Link to="/user/login">{User.email}</Link></li>
+                     <ul className="nav navbar-nav navbar-right">
+                         <li><Link to="/user/login">{User.email}</Link></li>
+                     </ul>
                   }
-                  </ul>
                </div>
             </nav>
          </div>

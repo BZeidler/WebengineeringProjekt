@@ -10,6 +10,7 @@ import App from './App';
 import User from './util/User'
 import Navigation from './components/Navigation'
 import Authentication from './components/Authentication'
+import SignUp from './components/SignUp'
 import registerServiceWorker from './registerServiceWorker';
 import MatchList from './components/ListMatches'
 import ChatList from './components/ChatList'
@@ -41,6 +42,9 @@ class Root extends React.Component {
                     <Route path="/user/login"
                            render={(props) => (
                                <Authentication {...props} updateAuthentication={this.updateAuthentication}/> )}/>
+                    <Route path="/user/signup"
+                           render={(props) => (
+                               <SignUp {...props} updateAuthentication={this.updateAuthentication}/> )}/>
                     <Route path="/chat/load/:id" component={ChatList}/>
                     <Route path="/matching/find" component={FindMatch}/>
 
