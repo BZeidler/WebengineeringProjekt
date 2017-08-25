@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { translate, Trans } from 'react-i18next';
 import {withCookies} from "react-cookie";
 
 import User from "../util/User";
@@ -76,11 +77,17 @@ class SignUp extends React.Component {
     }
 
     render() {
+      const { t, i18n } = this.props;
+      
+      const changeLanguage = (lng) => {
+          i18n.changeLanguage(lng);
+      }
+
         let signupComponent =
             <div>
                 <form onSubmit={this.handleSubmit} className="form-horizontal">
                     <div className="form-group">
-                        <label className="col-sm-2">Email</label>
+                        <label className="col-sm-2">{t('Email')}</label>
                         <div className="col-sm-4">
                             <input type="text" className="form-control" autoFocus={true}
                                    value={this.state.email}
@@ -88,7 +95,7 @@ class SignUp extends React.Component {
                         </div>
                     </div>
                     <div className="form-group">
-                        <label className="col-sm-2">Name</label>
+                        <label className="col-sm-2">{t('Name')}</label>
                         <div className="col-sm-4">
                             <input type="text" className="form-control" autoFocus={true}
                                    value={this.state.name}
@@ -96,7 +103,7 @@ class SignUp extends React.Component {
                         </div>
                     </div>
                     <div className="form-group">
-                        <label className="col-sm-2">Message</label>
+                        <label className="col-sm-2">{t('Message')}</label>
                         <div className="col-sm-4">
                             <input type="text" className="form-control" autoFocus={true}
                                    value={this.state.message}
@@ -104,14 +111,14 @@ class SignUp extends React.Component {
                         </div>
                     </div>
                     <div className="form-group">
-                        <label className="col-sm-2">Password</label>
+                        <label className="col-sm-2">{t('Password')}</label>
                         <div className="col-sm-4">
                             <input type="text" name="text" className="form-control"
                                    value={this.state.password}
                                    onChange={this.handlePasswordChange}/>
                         </div>
                     </div>
-                    <input type="submit" className="btn btn-success" value="Submit"/>
+                    <input type="submit" className="btn btn-success" value={t('Submit')}/>
                 </form>
               </div>
 
@@ -121,7 +128,7 @@ class SignUp extends React.Component {
                 <p/>
                 { this.state.error &&
                 <div className="alert alert-danger">
-                    Email is already in use.
+                    {t('Email is already in use.')}
                 </div>
                 }
             </div>
@@ -130,4 +137,4 @@ class SignUp extends React.Component {
 }
 
 
-export default withCookies(SignUp);
+export default translate('common')(withCookies(SignUp));
