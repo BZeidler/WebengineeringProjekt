@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import {withCookies} from "react-cookie";
+import { translate, Trans } from 'react-i18next';
 
 import User from "../util/User";
 
@@ -75,6 +76,12 @@ class Authentication extends React.Component {
 
 
     render() {
+        const { t, i18n } = this.props;
+      
+        const changeLanguage = (lng) => {
+            i18n.changeLanguage(lng);
+        }
+        
         let loginComponent = null;
         if (User.isNotAuthenticated()) {
             loginComponent =
@@ -82,7 +89,7 @@ class Authentication extends React.Component {
                 <form onSubmit={this.handleSubmit} className="form-horizontal">
                     <div className="form-group">
                         <label className="col-sm-2">
-                            Email
+                            {t('Email')}
                         </label>
                         <div className="col-sm-4">
                             <input type="text" className="form-control"
@@ -94,7 +101,7 @@ class Authentication extends React.Component {
 
                     <div className="form-group">
                         <label className="col-sm-2">
-                            Password
+                            {t('Password')}
                         </label>
                         <div className="col-sm-4">
                             <input type="password" name="password" className="form-control"
@@ -102,7 +109,7 @@ class Authentication extends React.Component {
                                    onChange={this.handlePasswordChange}/>
                         </div>
                     </div>
-                    <input type="submit" className="btn btn-success" value="Submit"/>
+                    <input type="submit" className="btn btn-success" value={t('Submit')}/>
                 </form>
               </div>
         } else {
@@ -119,7 +126,7 @@ class Authentication extends React.Component {
                 <p/>
                 { this.state.error &&
                 <div className="alert alert-danger">
-                    Login was not successful.
+                    {t('Login was not successful.')}
                 </div>
                 }
             </div>
@@ -128,4 +135,4 @@ class Authentication extends React.Component {
 }
 
 
-export default withCookies(Authentication);
+export default translate('common')(withCookies(Authentication));
