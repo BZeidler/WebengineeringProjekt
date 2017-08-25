@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import { translate, Trans } from 'react-i18next';
 import User from "../util/User";
 
 class Navigation extends React.Component {
@@ -9,24 +10,29 @@ class Navigation extends React.Component {
       this.forceUpdate();
    }
    render() {
+      const { t, i18n } = this.props;
+      
+      const changeLanguage = (lng) => {
+          i18n.changeLanguage(lng);
+      }
       return (
 
          <div className="bd-example" data-example-id="">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-               <a className="navbar-brand" href="#">Navbar</a>
+               <a className="navbar-brand" href="#">{t('Navbar')}</a>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul className="navbar-nav mr-auto">
-                     <li className="nav-item"><a className="nav-link" href="/">Matches</a></li>
+                     <li className="nav-item"><a className="nav-link" href="/">{t('Matches')}</a></li>
                      <li className="nav-item">
-                        <Link className="nav-link" to="/matching/find">Find People</Link>
+                        <Link className="nav-link" to="/matching/find">{t('Find People')}</Link>
                      </li>
                   </ul>
                   {
                      User.isNotAuthenticated() &&
                      <ul className="nav navbar-nav navbar-right">
-                         <li><Link to="/user/login">Login</Link></li> 
-                         <li><Link to="/user/SignUp">SignUp</Link></li>
+                         <li><Link to="/user/login">{t('Login')}</Link></li> 
+                         <li><Link to="/user/SignUp">{t('SignUp')}</Link></li>
                      </ul>
                   }
                   {
@@ -41,4 +47,4 @@ class Navigation extends React.Component {
       );
    }
 }
-  export default Navigation;
+export default translate('common')(Navigation);
