@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { translate, Trans } from 'react-i18next';
 import User from "../util/User";
 
 class ChatList extends React.Component {
@@ -61,13 +62,18 @@ class ChatList extends React.Component {
 
 
    render() {
+      const { t, i18n } = this.props;
+      
+      const changeLanguage = (lng) => {
+          i18n.changeLanguage(lng);
+      }
       return (
          <div className="component">
             <table className="table table-hover">
                <thead>
                   <tr>
-                     <th className="col-sm-2">Date Name</th>
-                     <th className="col-sm-6">Message</th>
+                     <th className="col-sm-2">{t('Date')}</th>
+                     <th className="col-sm-6">{t('Message')}</th>
                      </tr>
                  </thead>
                  <tbody>
@@ -77,12 +83,12 @@ class ChatList extends React.Component {
             <form onSubmit={this.handleSubmit}>
                <div className="form-group">
                   <label>
-                     New Message
+                     {t('New Message')}
                   </label>
                   <textarea className="form-control"
                      onChange={this.handleMessageChange}/>
                </div>
-               <input type="submit" className="btn btn-success" value="Submit"/>
+               <input type="submit" className="btn btn-success" value={t('Submit')}/>
             </form>
          </div>
       );
@@ -90,4 +96,4 @@ class ChatList extends React.Component {
 }
 
 
-export default ChatList;
+export default translate('common')(ChatList);
