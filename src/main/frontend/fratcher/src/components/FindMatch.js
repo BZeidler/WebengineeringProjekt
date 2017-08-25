@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { translate, Trans } from 'react-i18next';
 import User from "../util/User";
 
 class FindMatch extends React.Component {
@@ -42,6 +43,11 @@ class FindMatch extends React.Component {
    }
       
    render() {
+      const { t, i18n } = this.props;
+      
+      const changeLanguage = (lng) => {
+          i18n.changeLanguage(lng);
+      }
       const suggestion = this.state.suggestion
       if(!suggestion)
          return <div/>;
@@ -50,7 +56,7 @@ class FindMatch extends React.Component {
             <table className="table table-hover">
                <thead>
                   <tr>
-                     <th className="col-sm-6">Message</th>
+                     <th className="col-sm-6">{t('Message')}</th>
                   </tr>
                </thead>
                <tbody>
@@ -59,10 +65,10 @@ class FindMatch extends React.Component {
             </table>
             <div>
                <form onSubmit={this.handleLike}>
-                  <input type="submit" className="btn" value="Like"/>
+                  <input type="submit" className="btn" value={t('Like')}/>
                </form>
                <form onSubmit={this.handleDislike}>
-                  <input type="submit" className="btn" value="Disike"/>
+                  <input type="submit" className="btn" value={t('Disike')}/>
                </form>
             </div>
          </div>
@@ -72,4 +78,4 @@ class FindMatch extends React.Component {
 
 
 
-export default FindMatch;
+export default translate('common')(FindMatch);
