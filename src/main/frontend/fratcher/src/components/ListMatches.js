@@ -48,7 +48,7 @@ class MatchList extends React.Component {
             isAuthor = true;
          }
 
-         let date = new Date(match.created_At).toDateString();
+         let date = new Date(match.lastMessage.created_At).toDateString();
          let author;
          if(match.lastMessage.author_Id === User.id)
          {
