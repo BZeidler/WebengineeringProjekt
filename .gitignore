@@ -2,3 +2,4 @@
 /test.mv.db.trace.db
 /test.trace.db
 target
+/src/main/frontend/.babelrc
